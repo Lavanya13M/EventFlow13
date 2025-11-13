@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Event</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav>
+  <a href="{{ url_for('index') }}">Home</a>
+  <a href="{{ url_for('register') }}">Register</a>
+  <a href="{{ url_for('event_form') }}">Event Form</a>
+</nav>
+
+
+  <form action="/event" method="POST" onsubmit="return validateDates();">
+    <h2>Create Event</h2>
+
+    <label for="title">Event Name</label>
+    <input type="text" id="title" name="title" placeholder="Enter event name" required>
+
+    <label for="description">Description</label>
+    <input id="description" name="description" placeholder="Description" type="text" required>
+
+    <label>Start Date</label>
+    <input type="date" id="startDate" name="startDate" required>
+
+    <label>End Date</label>
+    <input type="date" id="endDate" name="endDate" required>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    function validateDates() {
+      let start = document.getElementById("startDate").value;
+      let end = document.getElementById("endDate").value;
+
+      if (end < start) {
+        alert("End date cannot be earlier than start date!");
+        return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>
